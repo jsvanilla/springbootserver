@@ -6,6 +6,9 @@
 trigger:
 - main
 
+variables:
+- group: my-vars
+
 pool:
   vmImage: 18.0.2.1-jdk-slim-buster
 
