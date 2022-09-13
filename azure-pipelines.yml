@@ -7,7 +7,7 @@ trigger:
 - main
 
 variables:
-- group: my-vars
+- group: springbootdeploys
 
 pool:
   vmImage: 18.0.2.1-jdk-slim-buster
@@ -25,5 +25,17 @@ steps:
     goals: 'package'
 
 - script:
-   ./mvnw spring-boot:build-image       
+   ./mvnw spring-boot:build-image
+  displayName: build docker container with maiven  
    
+- script:
+   docker login     
+   $(DOCKERHUB_PASS)
+  displayName: login to dockerhub
+
+- script:
+   docker tag e20223f10e8a jaguarjs/firstjavaserver:2
+
+- script:
+   docker push jaguarjs/firstjavaserver:2
+
